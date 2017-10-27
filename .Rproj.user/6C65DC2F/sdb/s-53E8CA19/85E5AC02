@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"p8105_hw4_gk2501\"\nauthor: \"Gaeun Kim\"\ndate: \"10/27/2017\"\noutput: html_document\n---\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n```\n\n```{r}\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(janitor)\n```\n\n\n```{r pols_gdp}\npols = read_csv(\"pols-month.csv\") %>%\n  clean_names() %>%\n  mutate(mon =\n  lubridate::floor_date(pols$mon, c(\"year\", \"month\"))\n  )\ngdp = read_csv(\"GDP.csv\") %>%\n  clean_names()\n```\n\n\n## R Markdown\n\nThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.\n\nWhen you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\n```{r cars}\nsummary(cars)\n```\n\n## Including Plots\n\nYou can also embed plots, for example:\n\n```{r pressure, echo=FALSE}\nplot(pressure)\n```\n\nNote that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.\n",
+    "created" : 1509078171716.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1217008754",
+    "id" : "85E5AC02",
+    "lastKnownWriteTime" : 2481051765037560417,
+    "last_content_update" : 1509079551260,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "last_setup_crc32" : "F8F43CCCbb338d19",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
