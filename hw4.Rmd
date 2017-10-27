@@ -1,0 +1,89 @@
+---
+title: "p8105_hw4_gk2501"
+author: "Gaeun Kim"
+date: "10/27/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 2
+
+Partners whould switch roles: the former “project lead” will be the “collaborator”, and the former “collaborator” will be the “project lead”. The project lead should:
+
+create a directory
+put an R project in the directory
+initialize Git
+add the collaborator as a collaborator on GitHub
+start an R Markdown file for this problem
+This problem uses the 538 datasets. Because this dataset is small and can be made public you should include that data file in your directory for this problem, and load that data file using relative paths.
+
+The project lead will load and tidy the data for this problem. Combine the data in pols-month.csv and  GDP.csv based on the date / month (use lubridate::floor_date to collase dates to the first day of the month).
+
+The collaborator will create a plot showing the GDP value over time, including the party of the president in an informative aesthetic.
+
+The R Markdown document in your GitHub repository should produce a file including code and text that explains the analyses and results for this problem.
+
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(janitor)
+```
+
+
+```{r pols_gdp_clean}
+pols = read_csv("pols-month.csv") %>%
+  clean_names() %>%
+  mutate(mon =
+  lubridate::floor_date(mon, c("month")), date = mon
+  ) %>%
+  select(date, everything(), -mon)
+
+gdp = read_csv("GDP.csv") %>%
+  clean_names() %>%
+  mutate(date =
+  lubridate::floor_date(date, c("month"))
+  ) %>%
+  mutate(gdp = value) %>%
+  select(-value)
+```
+
+I have read and cleaned both the pols data and gdp data. Also, I have changed their mon/date variable to have the same name and be both dates to the first day of the 
+month. Next, I will join the two datasets by date. 
+
+```{r pols_gdp_graph}
+pols_gdp = left_join(pols, gdp, by = "date") %>%
+  group_by(date) %>%
+  summarise(gdp_month = mean(as.numeric(gdp), na.rm = TRUE),
+            prez_party = ifelse(prez_gop > 0, "republican", "democratic")) %>%
+  na.omit()
+pols_gdp %>%
+  ggplot(aes(x = date, y = gdp_month)) +
+  geom_point(aes(color = prez_party)) +
+  geom_line()
+```
+
+Above graph shows the GDP of U.S. in `r range(pols_gdp$date)`, including the party of the president during those period (red dots indicating a democratic president and blue dots indicating a republican president).
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
