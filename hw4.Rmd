@@ -35,14 +35,14 @@ library(janitor)
 
 
 ```{r pols_gdp_clean}
-pols = read_csv("pols-month.csv") %>%
+pols = read_csv("./data/pols-month.csv") %>%
   clean_names() %>%
   mutate(mon =
   lubridate::floor_date(mon, c("month")), date = mon
   ) %>%
   select(date, everything(), -mon)
 
-gdp = read_csv("GDP.csv") %>%
+gdp = read_csv("./data/GDP.csv") %>%
   clean_names() %>%
   mutate(date =
   lubridate::floor_date(date, c("month"))
@@ -66,7 +66,7 @@ pols_gdp %>%
   geom_line()
 ```
 
-Above graph shows the GDP of U.S. in `r range(pols_gdp$date)`, including the party of the president during those period (red dots indicating a democratic president and blue dots indicating a republican president).
+Above graph shows the GDP of U.S.during `r range(pols_gdp$date)`, including the party of the president during those period (red dots indicating a democratic president and blue dots indicating a republican president).
 
 ## R Markdown
 
