@@ -66,8 +66,7 @@ pols_gdp %>%
   geom_line()
 ```
 
-Above graph shows the GDP of U.S.during `r range(pols_gdp$date)`, including the party of the president during those period (red dots indicating a democratic president and blue dots indicating a republican president).
-
+Above graph shows the GDP of U.S.during `r range(pols_gdp$date)`, including the party of the president during those period (red dots indicating a democratic president and blue dots indicating a republican president).From the graph, we see two significant drop in GDP during 1950's and the late 2000's. However, after the drop in the 50's, there was a striking surge in the U.S. GDP that marked as the higest point during the whole period. There seems to be no significant relation between GDP and the political party of the president.
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
