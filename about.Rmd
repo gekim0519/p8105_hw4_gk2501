@@ -1,0 +1,13 @@
+---
+title: "About"
+---
+Hi, my name is Gaeun Kim but I also go by Sara. 
+
+I am a first year master's student from Korea studying Biostatistics in Columbia 
+
+University Mailman School of Public Health.
+
+My full CV is available [here](files/CV.pdf).
+
+
+
